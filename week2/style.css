@@ -1,6 +1,6 @@
 /* Reset Styles */
 body {
-    background-color:#b3b3b3);
+    background-color:#505050);
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -13,6 +13,10 @@ header {
     color: #fff;
     text-align: center;
     padding: 25px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 .headeraH1 {
