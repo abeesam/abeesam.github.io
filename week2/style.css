@@ -127,8 +127,8 @@ main h3 {
 /* Media Queries for Responsiveness */
 @media (max-width: 800px) {
     .service-column {
-        flex-basis: calc(50% - 20px);
-        max-width: calc(50% - 20px);
+        flex-basis: calc(25% - 20px);
+        max-width: calc(0% - 20px);
     }
 }
 
