@@ -1,138 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
     <title>User Registration Form</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <h1>User Registration</h1>
-    <form id="registrationForm">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Enter your username">
-            <div class="error" id="usernameError"></div>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="text" id="email" placeholder="Enter your email">
-            <div class="error" id="emailError"></div>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" placeholder="Enter your password">
-            <div class="error" id="passwordError"></div>
-        </div>
-        <div>
-            <label for="confirmPassword">Confirm Password:</label>
-            <input type="password" id="confirmPassword" placeholder="Confirm your password">
-            <div class="error" id="confirmPasswordError"></div>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
-    <script>
-        const form = document.getElementById('registrationForm');
-        const username = document.getElementById('username');
-        const email = document.getElementById('email');
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirmPassword');
-        const usernameError = document.getElementById('usernameError');
-        const emailError = document.getElementById('emailError');
-        const passwordError = document.getElementById('passwordError');
-        const confirmPasswordError = document.getElementById('confirmPasswordError');
-
-        form.addEventListener('submit', function (event) {
-            // Validate username
-            if (username.value.trim() === '') {
-                showError(usernameError, 'Username is required');
-                event.preventDefault();
-            } else {
-                hideError(usernameError);
-            }
-
-            // Validate email
-            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (email.value.trim() === '') {
-                showError(emailError, 'Email is required');
-                event.preventDefault();
-            } else if (!emailPattern.test(email.value)) {
-                showError(emailError, 'Invalid email format');
-                event.preventDefault();
-            } else {
-                hideError(emailError);
-            }
-
-            // Validate password
-            if (password.value.trim() === '') {
-                showError(passwordError, 'Password is required');
-                event.preventDefault();
-            } else if (password.value.length < 8) {
-                showError(passwordError, 'Password must be at least 8 characters');
-                event.preventDefault();
-            } else {
-                hideError(passwordError);
-            }
-
-            // Validate confirm password
-            if (confirmPassword.value.trim() === '') {
-                showError(confirmPasswordError, 'Please confirm your password');
-                event.preventDefault();
-            } else if (confirmPassword.value !== password.value) {
-                showError(confirmPasswordError, 'Passwords do not match');
-                event.preventDefault();
-            } else {
-                hideError(confirmPasswordError);
-            }
-        });
-
-        // Real-time validation on input blur
-        username.addEventListener('blur', function () {
-            if (username.value.trim() === '') {
-                showError(usernameError, 'Username is required');
-            } else {
-                hideError(usernameError);
-            }
-        });
-
-        email.addEventListener('blur', function () {
-            if (email.value.trim() === '') {
-                showError(emailError, 'Email is required');
-            } else if (!emailPattern.test(email.value)) {
-                showError(emailError, 'Invalid email format');
-            } else {
-                hideError(emailError);
-            }
-        });
-
-        password.addEventListener('blur', function () {
-            if (password.value.trim() === '') {
-                showError(passwordError, 'Password is required');
-            } else if (password.value.length < 8) {
-                showError(passwordError, 'Password must be at least 8 characters');
-            } else {
-                hideError(passwordError);
-            }
-        });
-
-        confirmPassword.addEventListener('blur', function () {
-            if (confirmPassword.value.trim() === '') {
-                showError(confirmPasswordError, 'Please confirm your password');
-            } else if (confirmPassword.value !== password.value) {
-                showError(confirmPasswordError, 'Passwords do not match');
-            } else {
-                hideError(confirmPasswordError);
-            }
-        });
-
-        // Helper functions to show and hide error messages
-        function showError(element, message) {
-            element.innerHTML = message;
-            element.style.display = 'block';
-        }
-
-        function hideError(element) {
-            element.innerHTML = '';
-            element.style.display = 'none';
-        }
-    </script>
+    <div id="form-container">
+        <h1>User Registration</h1>
+        <form id="registrationForm" class="form">
+            <div class="input-control">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter your username" class="input" />
+                <div class="error" id="usernameError"></div>
+            </div>
+            <div class="input-control">
+                <label for="email">Email:</label>
+                <input type="text" id="email" placeholder="Enter your email" class="input" />
+                <div class="error" id="emailError"></div>
+            </div>
+            <div class="input-control">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password" class="input" />
+                <div class="error" id="passwordError"></div>
+            </div>
+            <div class="input-control">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm your password" class="input" />
+                <div class="error" id="confirmPasswordError"></div>
+            </div>
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
