@@ -1,37 +1,43 @@
-var cityContainer = document.getElementById("city-info");
-var btn = document.getElementById("btn");
-btn.addEventListener("click", function(){
-var ourRequest = new XMLHttpRequest();
-ourRequest.open('GET', 'https://abeesam.github.io/cities1.json');
-ourRequest.onload = function() {
-var ourData = JSON.parse(ourRequest.responseText);
-renderHTML(ourData);
-btn.classList.add("hide-me");
-};
-ourRequest.send();
+// Step 1: Get your API key from OpenWeatherMap
+const apiKey = 'your_api_key_here'; // Replace with your actual API key
+
+// Step 2: Create variables to store references
+const cityInput = document.getElementById('cityInput');
+const btn = document.getElementById('btn');
+const weatherInfo = document.getElementById('weather-info');
+
+// Step 3: Add an event listener to the button
+btn.addEventListener('click', () => {
+    // Step 4: Get the value of the input field
+    const cityName = cityInput.value;
+
+    if (cityName.trim() === '') {
+        alert('Please enter a city name');
+        return;
+    }
+
+    // Step 5: Make an HTTP request to OpenWeatherMap API
+    const url = https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey};
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Step 7: Parse and update weather info div
+            const weatherDetails = `
+                <p>Weather: ${data.weather[0].description}</p>
+                <p>Temperature: ${data.main.temp} &#8451;</p>
+                <p>Wind Speed: ${data.wind.speed} m/s</p>
+            `;
+            weatherInfo.innerHTML = weatherDetails;
+        })
+        .catch(error => {
+            // Step 6: Error handling
+            console.error('Error fetching data:', error.message);
+            // Handle different types of errors here
+        });
 });
-function renderHTML(data){
-var htmlString = "";
-for (i=0; i<data.length; i++){
-htmlString += "<p>" + data[i].name + " is a city in " + data[i].country + ",</br> Where you can enjoy indoor places like: " ;
-for (ii = 0; ii < data[i].places.indoor.length; ii++) {
-// Loop through the indoor places of the current city.
-if (ii == 0) {
-htmlString += data[i].places.indoor[ii];
-} else {
-htmlString += ", and " + data[i].places.indoor[ii];
-}
-}
-htmlString += '. & enjoy outdoor places like: ';
-// Loop through the outdoor places of the current city.
-for (ii = 0; ii < data[i].places.outdoor.length; ii++) {
-if (ii == 0) {
-htmlString += data[i].places.outdoor[ii];
-} else {
-htmlString += " and " + data[i].places.outdoor[ii];
-}
-}
-htmlString += '.</p>';
-}
-cityContainer.insertAdjacentHTML('beforeend' , htmlString);
-}
